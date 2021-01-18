@@ -56,7 +56,7 @@ import String exposing (padLeft)
 
 ----------------------------- DAILY TIME ------------------------------
 
-{-| Convert a `Time.Posix` to Internet Time for that
+{-| Converts a `Time.Posix` to Internet Time for that
 particular day as a raw Float.
 
     InternetTime.fromPosix 1525244393059 -- 333
@@ -66,11 +66,10 @@ fromPosix : Time.Posix -> Float
 fromPosix = fromPosixCustom 0
 
 
-{-| Convert a `Time.Posix` to Internet Time for
-that particular day.
-
-The output is a `String` with padded 0s so it's
-always three digits long.
+{-| Converts a `Time.Posix` to Internet Time for
+that particular day. The output is a `String`
+with padded 0s if necessary so it displays
+as a traditionally correct 3 digit number.
 
     InternetTime.displayFromPosix 1525244393059 -- "333"
     InternetTime.displayFromPosix 1525221281000 -- "065"
@@ -92,7 +91,7 @@ displayFromPosix = displayFromPosixCustom 0
 
 This is the largest possible measurement of time in Internet Time.
 
-1 beat = 86400 milliseconds. (86.4 seconds)
+- 1 beat = 86400 milliseconds. (86.4 seconds)
 
 -}
 beat : Int -- Int == milliseconds in Time
@@ -140,9 +139,7 @@ millisToBeats t =
 
 
 
-{-| Convert a `Time` to the Internet Time for that particular day as a Float.
-
-This calculation also converts the time to Internet Time's timezone (UTC+01:00).
+{-| Converts a `Time.Posix` to the Internet Time for that particular day as a `Float`.
 
 The first argument is for how much detail (extra decimal points)
 you want - beats (0) are the largest form of measurement possible.
@@ -151,9 +148,6 @@ you want - beats (0) are the largest form of measurement possible.
     fromPosixCustom 2 1525244393059 -- 333.25 (extra detail w/ centibeats)
     fromPosixCustom 0 1525221281000 -- 65
     fromPosixCustom 2 1525221281000 -- 65.75 (extra detail w/ centibeats)
-
-This returns an `Int` no matter how much detail because it's more accurate to use `Int` than `Float` for this type of context.
-(Floating point accuracy can waver and create artefacts when displaying or computing.)
 -}
 fromPosixCustom : Int -> Time.Posix -> Float
 fromPosixCustom decimalPlaces time =
@@ -170,16 +164,19 @@ fromPosixCustom decimalPlaces time =
         |> (\t -> toFloat t / toFloat thousands) -- put the decimals back in to bring back decimal points
 
 
-{-| Convert a `Time` to a Internet Time for that particular day in the form of a display-ready `String`.
-This calculation also converts the time to Internet Time's timezone (UTC+01:00).
-The first argument is for how much detail (extra digits) you want - beats are the largest form of measurement possible.
+{-| Converts a `Time.Posix` to a Internet Time for that particular day
+in the form of a display-ready `String`.
+
+The first argument is for how much detail (extra digits) you want -
+beats are the largest form of measurement possible.
 
     displayFromPosixCustom 0 1525244393059 -- "333"
     displayFromPosixCustom 2 1525244393059 -- "333.25" (extra detail w/ centibeats)
     displayFromPosixCustom 0 1525294572000 -- "914"
     displayFromPosixCustom 2 1525294572000 -- "914.37" (extra detail w/ centibeats)
 
-This time is padded with zeroes so you get the proper 3-number display for beats.
+This time is padded with zeroes so you get the traditionally
+correct 3-digit display for beats.
 
     displayFromPosixCustom 0 1525221281000 -- "065"
     displayFromPosixCustom 2 1525221281000 -- "065.75" (extra detail w/ centibeats)
