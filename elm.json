@@ -3,7 +3,7 @@
     "name": "dzuk-mutant/internet-time-elm",
     "summary": "Convert to and display Internet Time.",
     "license": "BSD-3-Clause",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "exposed-modules": [
         "InternetTime"
     ],

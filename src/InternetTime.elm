@@ -59,8 +59,11 @@ import String exposing (padLeft)
 {-| Converts a `Time.Posix` to Internet Time for that
 particular day as a raw Float.
 
-    InternetTime.fromPosix 1525244393059 -- 333
-    InternetTime.fromPosix 1525221281000 -- 65
+    oneTime = Time.millisToPosix 1525244393059
+    anotherTime = Time.millisToPosix 1525221281000
+
+    InternetTime.fromPosix oneTime -- 333
+    InternetTime.fromPosix anotherTime -- 65
 -}
 fromPosix : Time.Posix -> Float
 fromPosix = fromPosixCustom 0
@@ -71,8 +74,11 @@ that particular day. The output is a `String`
 with padded 0s if necessary so it displays
 as a traditionally correct 3 digit number.
 
-    InternetTime.displayFromPosix 1525244393059 -- "333"
-    InternetTime.displayFromPosix 1525221281000 -- "065"
+    oneTime = Time.millisToPosix 1525244393059
+    anotherTime = Time.millisToPosix 1525221281000
+    
+    InternetTime.displayFromPosix oneTime -- "333"
+    InternetTime.displayFromPosix anotherTime -- "065"
 -}
 displayFromPosix : Time.Posix -> String
 displayFromPosix = displayFromPosixCustom 0
@@ -144,10 +150,13 @@ millisToBeats t =
 The first argument is for how much detail (extra decimal points)
 you want - beats (0) are the largest form of measurement possible.
 
-    fromPosixCustom 0 1525244393059 -- 333
-    fromPosixCustom 2 1525244393059 -- 333.25 (extra detail w/ centibeats)
-    fromPosixCustom 0 1525221281000 -- 65
-    fromPosixCustom 2 1525221281000 -- 65.75 (extra detail w/ centibeats)
+    oneTime = Time.millisToPosix 1525244393059
+    anotherTime = Time.millisToPosix 1525221281000
+
+    fromPosixCustom 0 oneTime -- 333
+    fromPosixCustom 2 oneTime -- 333.25 (extra detail w/ centibeats)
+    fromPosixCustom 0 anotherTime -- 65
+    fromPosixCustom 2 anotherTime -- 65.75 (extra detail w/ centibeats)
 -}
 fromPosixCustom : Int -> Time.Posix -> Float
 fromPosixCustom decimalPlaces time =
@@ -170,16 +179,21 @@ in the form of a display-ready `String`.
 The first argument is for how much detail (extra digits) you want -
 beats are the largest form of measurement possible.
 
-    displayFromPosixCustom 0 1525244393059 -- "333"
-    displayFromPosixCustom 2 1525244393059 -- "333.25" (extra detail w/ centibeats)
-    displayFromPosixCustom 0 1525294572000 -- "914"
-    displayFromPosixCustom 2 1525294572000 -- "914.37" (extra detail w/ centibeats)
+    oneTime = Time.millisToPosix 1525244393059
+    anotherTime = Time.millisToPosix 1525294572000
+
+    displayFromPosixCustom 0 oneTime -- "333"
+    displayFromPosixCustom 2 oneTime -- "333.25" (extra detail w/ centibeats)
+    displayFromPosixCustom 0 anotherTime -- "914"
+    displayFromPosixCustom 2 anotherTime -- "914.37" (extra detail w/ centibeats)
 
 This time is padded with zeroes so you get the traditionally
 correct 3-digit display for beats.
 
-    displayFromPosixCustom 0 1525221281000 -- "065"
-    displayFromPosixCustom 2 1525221281000 -- "065.75" (extra detail w/ centibeats)
+    thirdTime = Time.millisToPosix 1525221281000
+
+    displayFromPosixCustom 0 thirdTime -- "065"
+    displayFromPosixCustom 2 thirdTime -- "065.75" (extra detail w/ centibeats)
 
 -}
 displayFromPosixCustom : Int -> Time.Posix -> String

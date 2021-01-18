@@ -3,12 +3,15 @@
 A simple module that lets you use Internet Time in Elm.
 
 Find out the Internet Time from a Posix Time:
-```
-    InternetTime.fromPosix 1525244393059 -- 333
-    InternetTime.fromPosix 1525221281000 -- 65
+``` 
+    oneTime = Time.millisToPosix 1525244393059
+    anotherTime = Time.millisToPosix 1525221281000
 
-    InternetTime.displayFromPosix 1525244393059 -- "333"
-    InternetTime.displayFromPosix 1525221281000 -- "065"
+    InternetTime.fromPosix oneTime -- 333
+    InternetTime.fromPosix anotherTime -- 65
+
+    InternetTime.displayFromPosix oneTime -- "333"
+    InternetTime.displayFromPosix anotherTime -- "065"
 ```
 
 Convert milliseconds into beats:
