@@ -29,8 +29,7 @@ you to put into your interfaces in whatever way you prefer.
 
 
 # Lenghts of time
-Converting milliseconds into beats,
-and using the cadence of Internet Time in your application.
+Use the cadence of Internet Time in your application.
 
 @docs beat, centibeat, millisToBeats
 
@@ -119,7 +118,7 @@ more precise.
 
     subscriptions : Model -> Sub Msg
     subscriptions model =
-        Time.every centibeat Tick
+        Time.every (25 * centibeat) Tick
 
 -}
 centibeat : Int -- Int == milliseconds in Time
