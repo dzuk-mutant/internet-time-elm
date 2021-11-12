@@ -99,7 +99,7 @@ This is the largest possible measurement of time in Internet Time.
 - 1 beat = 86400 milliseconds. (86.4 seconds)
 
 -}
-beat : Int -- Int == milliseconds in Time
+beat : Int
 beat =
     86400
 
@@ -121,7 +121,7 @@ more precise.
         Time.every (25 * centibeat) Tick
 
 -}
-centibeat : Int -- Int == milliseconds in Time
+centibeat : Int
 centibeat =
     864
 
